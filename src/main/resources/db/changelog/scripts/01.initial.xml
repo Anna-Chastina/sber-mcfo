@@ -1,0 +1,138 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="Chastina" id="01.initial.xml">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="IFRS_transactions"/>
+                <tableExists tableName="manual_transactions_info"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="manual_transactions_info" remarks="информация о загрузки ручных проводок/корректиров">
+
+            <column name="id"                           type="bigint"       remarks="id"
+                    defaultValueComputed="nextval('manual_transactions_info_sequence')">
+                <constraints nullable="false"/></column>
+            <column name="date"	                        type="timestamp with time zone"       remarks="Дата/время загрузки проводки/корректировки"/>
+            <column name="uploader"                     type="varchar"                        remarks="Ответственное лицо"/>
+            <column name="sheetName"	                type="varchar"                        remarks="Наименование листа excel"/>
+            <column name="groupMember"	                type="varchar"                        remarks="Участник группы"/>
+            <column name="file"                         type="varchar"                        remarks="Наименование файла, из которого производится загрузка"/>
+            <column name="successful"                   type="boolean"                        remarks="Результат операции"/>
+            <column name="report_period_id"	            type="varchar"                        remarks="Дата отчетного периода"/>
+
+        </createTable>
+
+        <addPrimaryKey columnNames="id"
+                       constraintName="pk_manual_transactions_info"
+                       tableName="manual_transactions_info"/>
+
+        <createTable tableName="IFRS_transactions" remarks="операции по Международному стандарту финансовой отчётности(МСФО)">
+
+            <column name="id"                           type="bigint"       remarks="id"
+            defaultValueComputed="nextval('IFRS_transactions_sequence')">
+                <constraints nullable="false"/></column>
+            <column name="report_period_id"	            type="bigint"       remarks="id даты отчетного периода"/>
+            <column name="BS_PL_impact"                 type="varchar"      />
+            <column name="transaction_id"	            type="bigint"       remarks="ID проводки/корректировки"/>
+            <column name="amount"                       type="bigint"       remarks="Сумма проводки"/>
+            <column name="IFRS_account"                 type="bigint"       remarks="Сумма проводки по МСФО"/>
+            <column name="IFRS_account_id"              type="bigint"       remarks="id счета МСФО"/>
+<!--            <column name="IFRS_account_name"            type="varchar"      remarks="Наименование счета МСФО"/>-->
+<!--            <column name="IFRS_number_account and name" type="varchar"      remarks="Номер и наименование счета МСФО"/>-->
+<!--            <column name="IFRS_number_account_short"    type="varchar"      remarks="Сокращенный номер счета МСФО"/>-->
+            <column name="RAR_account"                  type="bigint"       />
+            <column name="Rar_account3"                 type="bigint"       />
+            <column name="Rar_account5"                 type="bigint"       />
+            <column name="SA-cons"                      type="varchar"      />
+            <column name="BS_line"                      type="varchar"      />
+            <column name="PL_line"                      type="varchar"      />
+            <column name="сategory"                     type="varchar"      />
+            <column name="сountry"                      type="varchar"      />
+            <column name="сurrency"                     type="varchar"      remarks="Валюта"/>
+            <column name="derivative_type"              type="varchar"      />
+            <column name="disclosure"                   type="varchar"      />
+            <column name="disclosure_aggregate"         type="varchar"      />
+            <column name="group_member"                 type="varchar"      />
+            <column name="individual_PLI"               type="varchar"      /> <!-- ??? varchar/bigint???????????????           -->
+            <column name="lease_maturity"               type="varchar"      /> <!-- ??? varchar/bigint???????????????    -->
+            <column name="loan_class"                   type="varchar"      /> <!-- ??? varchar/bigint???????????????    -->
+            <column name="loan_group"                   type="varchar"      /> <!-- ??? varchar/bigint???????????????    -->
+            <column name="maturity"                     type="varchar"      />
+            <column name="overdue"                      type="varchar"      /><!-- ??? varchar/bigint???????????????    -->
+            <column name="PPE_class"                    type="varchar"      />
+            <column name="FS_PPE_class"                 type="varchar"      />
+            <column name="rating"                       type="varchar"      /><!-- ??? varchar/bigint???????????????    -->
+            <column name="restructured"                 type="varchar"      /><!-- ??? varchar/bigint???????????????    -->
+            <column name="sector"                       type="varchar"      /><!-- ??? varchar/bigint???????????????    -->
+            <column name="rep_sector"                   type="varchar"      /><!-- ??? varchar/bigint???????????????    -->
+            <column name="security_type"                type="varchar"      /><!-- ??? varchar/bigint???????????????    -->
+            <column name="security_type_aggregate"      type="varchar"      /><!-- ??? varchar/bigint???????????????    -->
+            <column name="segment"                      type="varchar"      /><!-- ??? varchar/bigint???????????????    -->
+            <column name="tax_difference"               type="varchar"      /><!-- ??? varchar/bigint???????????????    -->
+            <column name="type"                         type="varchar"      /><!-- ??? varchar/bigint???????????????    -->
+            <column name="undisc_cf_maturity"           type="varchar"      />
+            <column name="IFRS_aggregate"               type="varchar"      />
+            <column name="component"                    type="varchar"      />
+            <column name="comment"                      type="varchar"      />
+            <column name="doer"                         type="varchar"      />
+            <column name="FV_level"                     type="varchar"      />
+            <column name="BSLineL2"                     type="varchar"      />
+            <column name="related_party"                type="varchar"      /><!-- ??? varchar/bigint???????????????    -->
+            <column name="FV3Lvl"                       type="varchar"      /><!-- ??? varchar/bigint???????????????    -->
+            <column name="NciLine"                      type="varchar"      /><!-- ??? varchar/bigint???????????????    -->
+            <column name="derivative"                   type="varchar"      /><!-- ??? varchar/bigint???????????????    -->
+            <column name="cons_group_member"            type="varchar"      />
+            <column name="tag"                          type="varchar"      />
+            <column name="temp_line"                    type="varchar"      /><!-- ??? varchar/bigint???????????????    -->
+            <column name="cons_layer"                   type="varchar"      />
+            <column name="cons_layer_aggregate"         type="varchar"      />
+            <column name="segment_reconc_line"          type="varchar"      />
+            <column name="segment_reconc_line_aggregate"    type="varchar"      />
+            <column name="corresponding_ifrs_account"    type="varchar"      /><!-- ??? varchar/bigint???????????????    -->
+            <column name="related_group_member"         type="varchar"      /><!-- ??? varchar/bigint???????????????    -->
+            <column name="label"                        type="varchar"      />
+            <column name="sub_gm"                       type="varchar"      /><!-- ??? varchar/bigint???????????????    -->
+            <column name="cons_sub_gm"                  type="varchar"      /><!-- ??? varchar/bigint???????????????    -->
+            <column name="related_sub_gm"               type="varchar"      /><!-- ??? varchar/bigint???????????????    -->
+            <column name="seg_block"                    type="varchar"      /><!-- ??? varchar/bigint???????????????    -->
+            <column name="seg_item"                     type="varchar"      /><!-- ??? varchar/bigint???????????????    -->
+            <column name="seg_line"                     type="varchar"      /><!-- ??? varchar/bigint???????????????    -->
+            <column name="report_period2"               type="varchar"      />
+            <column name="rng_type"                     type="varchar"      /><!-- ??? varchar/bigint???????????????    -->
+            <column name="rec_layer"                    type="varchar"      />
+            <column name="pd"                           type="varchar"      />
+            <column name="ecl"                          type="varchar"      />
+            <column name="val_tp"                       type="varchar"      />
+            <column name="fvpl_tp"                      type="varchar"      /><!-- ??? varchar/bigint???????????????    -->
+            <column name="bank_tp"                      type="varchar"      /><!-- ??? varchar/bigint???????????????    -->
+            <column name="RAR_account_name"             type="varchar"      />
+            <column name="RAR_account_and_name"         type="varchar"      />
+            <column name="pl_rep"                       type="varchar"      />
+            <column name="pl_rep_ordered"               type="varchar"      />
+            <column name="bs_rep"                       type="varchar"      />
+            <column name="bs_rep_ordered"               type="varchar"      /><!-- ??? varchar/bigint???????????????    -->
+            <column name="seg_ln"                       type="varchar"      /><!-- ??? varchar/bigint???????????????    -->
+            <column name="import_date_time"             type="varchar"      remarks="Дата и время загрузки операции"/>
+            <column name="uploader"                     type="varchar"      remarks="Лицо, загрузившее проводку"/>
+
+        </createTable>
+
+        <addPrimaryKey columnNames="id"
+                       constraintName="pk_IFRS_transactions"
+                       tableName="IFRS_transactions"/>
+<!--        Настроить связь с таблицей счетов мсфо account, транзакций, дат отчетных периодов, ответственны лиц?? -->
+        <addForeignKeyConstraint baseTableName="IFRS_transactions"
+                                 baseColumnNames="transaction_id"
+                                 constraintName="fk_IFRS_transactions"
+                                 referencedTableName="manual_transactions_info"
+                                 referencedColumnNames="id"
+                                 onDelete="SET NULL"
+                                 onUpdate="CASCADE"/>
+        <loadData tableName="IFRS_transactions" relativeToChangelogFile="true" file="../data/ifrs.csv" encoding="UTF-8" separator=";"/>
+
+
+    </changeSet>
+</databaseChangeLog>
