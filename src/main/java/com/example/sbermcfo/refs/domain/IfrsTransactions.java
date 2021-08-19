@@ -1,32 +1,34 @@
 package com.example.sbermcfo.refs.domain;
 
 import lombok.Builder;
+import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
+@Data
 @Builder
 @Table("IFRS_transactions")
-public class ifrsTransactions {
+public class IfrsTransactions {
 
     @Id
-    private Long id;
+    private Integer id;
     @Column("report_period_id")
-    private Long reportDateId;
+    private Integer reportDateId;
     @Column("BS_PL_impact")
     private String bsPlImpact;
     @Column("transaction_id")
-    private Long transactionId;
+    private Integer transactionId;
     @Column("amount")
     private Double amount;
     @Column("IFRS_account")
-    private Long ifrsAccountId;
+    private Integer ifrsAccountId;
     @Column("RAR_account")
     private Double rarAccount;
     @Column("Rar_account3")
     private Double rarAccount3;
     @Column("Rar_account5")
-    private Double getRarAccount5;
+    private Double rarAccount5;
     @Column("SA-cons")
     private String saCons;
     @Column("BS_line")
@@ -34,11 +36,11 @@ public class ifrsTransactions {
     @Column("PL_line")
     private String plLine;
     @Column("сategory")
-    private String сategory;
+    private String category;
     @Column("сountry")
-    private String сountry;
+    private String country;
     @Column("сurrency")
-    private String сurrency;
+    private String currency;
     @Column("derivative_type")
     private String derivativeType;
     @Column("disclosure")
@@ -120,7 +122,7 @@ public class ifrsTransactions {
     @Column("corresponding_ifrs_account")
     private String correspondingIfrsAccount;
     @Column("related_group_member")
-    private String related_group_member;
+    private String relatedGroupMember;
     @Column("label")
     private String label;
     @Column("sub_gm")
@@ -167,4 +169,6 @@ public class ifrsTransactions {
     private String segLn;
     @Column("import_date_time")
     private String importDateTime;
+    @Column("uploader")
+    private String uploader;
 }

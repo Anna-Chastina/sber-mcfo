@@ -1,24 +1,26 @@
 package com.example.sbermcfo.refs.dto;
 
 import lombok.Builder;
+import lombok.Data;
 
+@Data
 @Builder
-public class ifrsTransactionsDto {
-    private Long id;
-    private Long reportDateId;
+public class IfrsTransactionsDto {
+    private Integer id;
+    private Integer reportDateId;
     private String bsPlImpact;
-    private Long transactionId;
+    private Integer transactionId;
     private Double amount;
-    private Long ifrsAccountId;
+    private Integer ifrsAccountId;
     private Double rarAccount;
     private Double rarAccount3;
-    private Double getRarAccount55;
+    private Double rarAccount5;
     private String saCons;
     private String bsLine;
     private String plLine;
-    private String сategory;
-    private String сountry;
-    private String сurrency;
+    private String category;
+    private String country;
+    private String currency;
     private String derivativeType;
     private String disclosure;
     private String disclosureAggregate;
@@ -59,7 +61,7 @@ public class ifrsTransactionsDto {
     private String segmentReconcLine;
     private String segmentReconcLineAggregate;
     private String correspondingIfrsAccount;
-    private String related_group_member;
+    private String relatedGroupMember;
     private String label;
     private String subGm;
     private String consSubGm;
@@ -83,4 +85,5 @@ public class ifrsTransactionsDto {
     private String bsRepOrdered;
     private String segLn;
     private String importDateTime;
+    private String uploader;
 }
