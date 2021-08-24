@@ -16,9 +16,11 @@ public class IfrsTransactions {
     @Column("report_period_id")
     private Integer reportDateId;
     @Column("BS_PL_impact")
-    private String bsPlImpact;
+    private Integer bsPlImpact;
     @Column("transaction_id")
     private Integer transactionId;
+    @Column("Short_Name")
+    private String shortName;
     @Column("amount")
     private Double amount;
     @Column("IFRS_account")

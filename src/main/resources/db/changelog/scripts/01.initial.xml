@@ -6,39 +6,40 @@
         <preConditions onFail="MARK_RAN">
             <not>
                 <tableExists tableName="IFRS_transactions"/>
-                <tableExists tableName="manual_transactions_info"/>
+<!--                <tableExists tableName="manual_transactions_info"/>-->
             </not>
         </preConditions>
 
-        <createTable tableName="manual_transactions_info" remarks="информация о загрузки ручных проводок/корректиров">
+<!--        <createTable tableName="manual_transactions_info" remarks="информация о загрузки ручных проводок/корректиров">-->
 
-            <column name="id"                           type="bigint"       remarks="id"
-                    defaultValueComputed="nextval('manual_transactions_info_sequence')">
-                <constraints nullable="false"/></column>
-            <column name="date"	                        type="timestamp with time zone"       remarks="Дата/время загрузки проводки/корректировки"/>
-            <column name="uploader"                     type="varchar"                        remarks="Ответственное лицо"/>
-            <column name="sheetName"	                type="varchar"                        remarks="Наименование листа excel"/>
-            <column name="groupMember"	                type="varchar"                        remarks="Участник группы"/>
-            <column name="file"                         type="varchar"                        remarks="Наименование файла, из которого производится загрузка"/>
-            <column name="successful"                   type="boolean"                        remarks="Результат операции"/>
-            <column name="report_period_id"	            type="varchar"                        remarks="Дата отчетного периода"/>
+<!--            <column name="id"                           type="bigint"       remarks="id"-->
+<!--                    defaultValueComputed="nextval('manual_transactions_info_sequence')">-->
+<!--                <constraints nullable="false"/></column>-->
+<!--            <column name="date"	                        type="timestamp with time zone"       remarks="Дата/время загрузки проводки/корректировки"/>-->
+<!--            <column name="uploader"                     type="varchar"                        remarks="Ответственное лицо"/>-->
+<!--            <column name="sheetName"	                type="varchar"                        remarks="Наименование листа excel"/>-->
+<!--            <column name="groupMember"	                type="varchar"                        remarks="Участник группы"/>-->
+<!--            <column name="file"                         type="varchar"                        remarks="Наименование файла, из которого производится загрузка"/>-->
+<!--            <column name="successful"                   type="boolean"                        remarks="Результат операции"/>-->
+<!--            <column name="report_period_id"	            type="varchar"                        remarks="Дата отчетного периода"/>-->
 
-        </createTable>
+<!--        </createTable>-->
 
-        <addPrimaryKey columnNames="id"
-                       constraintName="pk_manual_transactions_info"
-                       tableName="manual_transactions_info"/>
-
+<!--        <addPrimaryKey columnNames="id"-->
+<!--                       constraintName="pk_manual_transactions_info"-->
+<!--                       tableName="manual_transactions_info"/>-->
+        <createSequence sequenceName="IFRS_transactions_SEQUENCE" startValue="1" incrementBy="1"/>
         <createTable tableName="IFRS_transactions" remarks="операции по Международному стандарту финансовой отчётности(МСФО)">
 
             <column name="id"                           type="bigint"       remarks="id"
             defaultValueComputed="nextval('IFRS_transactions_sequence')">
                 <constraints nullable="false"/></column>
             <column name="report_period_id"	            type="bigint"       remarks="id даты отчетного периода"/>
-            <column name="BS_PL_impact"                 type="varchar"      />
+            <column name="BS_PL_impact"                 type="bigint"      />
             <column name="transaction_id"	            type="bigint"       remarks="ID проводки/корректировки"/>
+            <column name="Short_Name"                   type="varchar"       remarks="Короткое наименование проводки"/>
             <column name="amount"                       type="bigint"       remarks="Сумма проводки"/>
-            <column name="IFRS_account"                 type="bigint"       remarks="Сумма проводки по МСФО"/>
+<!--            <column name="IFRS_account"                 type="bigint"       remarks="Сумма проводки по МСФО"/>-->
             <column name="IFRS_account_id"              type="bigint"       remarks="id счета МСФО"/>
 <!--            <column name="IFRS_account_name"            type="varchar"      remarks="Наименование счета МСФО"/>-->
 <!--            <column name="IFRS_number_account and name" type="varchar"      remarks="Номер и наименование счета МСФО"/>-->
@@ -124,13 +125,13 @@
                        constraintName="pk_IFRS_transactions"
                        tableName="IFRS_transactions"/>
 <!--        Настроить связь с таблицей счетов мсфо account, транзакций, дат отчетных периодов, ответственны лиц?? -->
-        <addForeignKeyConstraint baseTableName="IFRS_transactions"
-                                 baseColumnNames="transaction_id"
-                                 constraintName="fk_IFRS_transactions"
-                                 referencedTableName="manual_transactions_info"
-                                 referencedColumnNames="id"
-                                 onDelete="SET NULL"
-                                 onUpdate="CASCADE"/>
+<!--        <addForeignKeyConstraint baseTableName="IFRS_transactions"-->
+<!--                                 baseColumnNames="transaction_id"-->
+<!--                                 constraintName="fk_IFRS_transactions"-->
+<!--                                 referencedTableName="manual_transactions_info"-->
+<!--                                 referencedColumnNames="id"-->
+<!--                                 onDelete="SET NULL"-->
+<!--                                 onUpdate="CASCADE"/>-->
         <loadData tableName="IFRS_transactions" relativeToChangelogFile="true" file="../data/ifrs.csv" encoding="UTF-8" separator=";"/>
 
 

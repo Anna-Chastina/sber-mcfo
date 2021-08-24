@@ -1,15 +1,20 @@
 package com.example.sbermcfo.refs.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class IfrsTransactionsDto {
     private Integer id;
     private Integer reportDateId;
-    private String bsPlImpact;
+    private Integer bsPlImpact;
     private Integer transactionId;
+    private String shortName;
     private Double amount;
     private Integer ifrsAccountId;
     private Double rarAccount;

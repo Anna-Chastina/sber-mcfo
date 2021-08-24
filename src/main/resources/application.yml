@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:h2:~/tzoom/СБЕР МСФО/db/tables
+    url: jdbc:h2:~/tzoom/db/test
     username: sa
     password: password
     driver-class-name: org.h2.Driver

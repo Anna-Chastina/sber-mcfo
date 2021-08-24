@@ -4,13 +4,19 @@ import com.example.sbermcfo.converter.IfrsTransactionsConverter;
 import com.example.sbermcfo.refs.domain.IfrsTransactions;
 import com.example.sbermcfo.refs.dto.IfrsTransactionsDto;
 import com.example.sbermcfo.refs.repo.IfrsTransactionsRepository;
+import liquibase.pro.packaged.I;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @Service
@@ -29,6 +35,13 @@ public class IfrsTransactionsServiceImp implements IfrsTransactionsService {
     }
 
     @Override
+    public List<IfrsTransactionsDto> getAll() {
+        Iterable<IfrsTransactions> all = ifrsTransactionsRepository.findAll();
+        return StreamSupport.stream(all.spliterator(), false)
+                .map(IfrsTransactionsConverter::convertToDto).collect(Collectors.toList());
+    }
+
+    @Override
     public IfrsTransactionsDto getById(Integer id) {
         return IfrsTransactionsConverter.convertToDto(ifrsTransactionsRepository.findById(id).orElseThrow(RuntimeException::new));
     }
@@ -43,6 +56,10 @@ public class IfrsTransactionsServiceImp implements IfrsTransactionsService {
         return IfrsTransactionsConverter.convertToDto(ifrsTransactionsRepository.save(IfrsTransactionsConverter.convertToEntity(dto)));
     }
 
+
+
+
+
     @Override
     public IfrsTransactionsDto update(IfrsTransactionsDto dto) {
         Optional<IfrsTransactions> byId = ifrsTransactionsRepository.findById(dto.getId());
@@ -51,6 +68,7 @@ public class IfrsTransactionsServiceImp implements IfrsTransactionsService {
             transaction.setId(dto.getId());
             transaction.setBsPlImpact(dto.getBsPlImpact());
             transaction.setTransactionId(dto.getTransactionId());
+            transaction.setShortName(dto.getShortName());
             transaction.setAmount(dto.getAmount());
             transaction.setIfrsAccountId(dto.getIfrsAccountId());
             transaction.setRarAccount(dto.getRarAccount());
