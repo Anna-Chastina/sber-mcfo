@@ -8,169 +8,167 @@ import org.springframework.data.relational.core.mapping.Table;
 
 @Data
 @Builder
-@Table("IFRS_transactions")
+@Table("IFRS_TRANSACTIONS")
 public class IfrsTransactions {
 
     @Id
     private Integer id;
-    @Column("report_period_id")
+    @Column("REPORT_PERIOD_ID")
     private Integer reportDateId;
-    @Column("BS_PL_impact")
+    @Column("BS_PL_IMPACT")
     private Integer bsPlImpact;
-    @Column("transaction_id")
+    @Column("TRANSACTION_ID")
     private Integer transactionId;
-    @Column("Short_Name")
+    @Column("SHORT_NAME")
     private String shortName;
-    @Column("amount")
+    @Column("AMOUNT")
     private Double amount;
-    @Column("IFRS_account")
+    @Column("IFRS_ACCOUNT_ID")
     private Integer ifrsAccountId;
-    @Column("RAR_account")
+    @Column("RAR_ACCOUNT")
     private Double rarAccount;
-    @Column("Rar_account3")
+    @Column("RAR_ACCOUNT3")
     private Double rarAccount3;
-    @Column("Rar_account5")
+    @Column("RAR_ACCOUNT5")
     private Double rarAccount5;
-    @Column("SA-cons")
+    @Column("SA-CONS")
     private String saCons;
-    @Column("BS_line")
+    @Column("BS_LINE")
     private String bsLine;
-    @Column("PL_line")
+    @Column("PL_LINE")
     private String plLine;
-    @Column("сategory")
+    @Column("CATEGORY")
     private String category;
-    @Column("сountry")
+    @Column("COUNTRY")
     private String country;
-    @Column("сurrency")
+    @Column("CURRENCY")
     private String currency;
-    @Column("derivative_type")
+    @Column("DERIVATIVE_TYPE")
     private String derivativeType;
-    @Column("disclosure")
+    @Column("DISCLOSURE")
     private String disclosure;
-    @Column("disclosure_aggregate")
+    @Column("DISCLOSURE_AGGREGATE")
     private String disclosureAggregate;
-    @Column("group_member")
+    @Column("GROUP_MEMBER")
     private String groupMember;
-    @Column("individual_PLI")
+    @Column("INDIVIDUAL_PLI")
     private String individualPli;
-    @Column("lease_maturity")
+    @Column("LEASE_MATURITY")
     private String leaseMaturity;
-    @Column("loan_class")
+    @Column("LOAN_CLASS")
     private String loanClass;
-    @Column("loan_group")
+    @Column("LOAN_GROUP")
     private String loanGroup;
-    @Column("maturity")
+    @Column("MATURITY")
     private String maturity;
-    @Column("overdue")
+    @Column("OVERDUE")
     private String overdue;
-    @Column("PPE_class")
+    @Column("PPE_CLASS")
     private String ppeClass;
-    @Column("FS_PPE_class")
+    @Column("FS_PPE_CLASS")
     private String fsPpeClass;
-    @Column("rating")
+    @Column("RATING")
     private String rating;
-    @Column("restructured")
+    @Column("RESTRUCTURED")
     private String restructured;
-    @Column("sector")
+    @Column("SELECTOR")
     private String sector;
-    @Column("rep_sector")
+    @Column("REP_SELECTOR")
     private String repSector;
-    @Column("security_type")
+    @Column("SECURITY_TYPE")
     private String securityType;
-    @Column("security_type_aggregate")
+    @Column("SECURITY_TYPE_AGGREGATE")
     private String securityTypeAggregate;
-    @Column("segment")
+    @Column("SEGMENT")
     private String segment;
-    @Column("tax_difference")
+    @Column("TAX_DIFFERENCE")
     private String taxDifference;
-    @Column("type")
+    @Column("TYPE")
     private String type;
-    @Column("undisc_cf_maturity")
-    private String undiscCfMaturity;
-    @Column("IFRS_aggregate")
-    private String ifrsAaggregate;
-    @Column("component")
-    private String component;
-    @Column("comment")
-    private String comment;
-    @Column("doer")
-    private String doer;
-    @Column("FV_level")
-    private String fvLevel;
-    @Column("BSLineL2")
-    private String bsLineL2;
-    @Column("related_party")
-    private String relatedParty;
-    @Column("FV3Lvl")
-    private String fv3Lvl;
-    @Column("NciLine")
-    private String nciLine;
-    @Column("derivative")
-    private String derivative;
-    @Column("cons_group_member")
-    private String consGroupMember;
-    @Column("tag")
-    private String tag;
-    @Column("temp_line")
-    private String tempLine;
-    @Column("cons_layer")
-    private String consLayer;
-    @Column("cons_layer_aggregate")
-    private String consLayerAggregate;
-    @Column("segment_reconc_line")
-    private String segmentReconcLine;
-    @Column("segment_reconc_line_aggregate")
-    private String segmentReconcLineAggregate;
-    @Column("corresponding_ifrs_account")
-    private String correspondingIfrsAccount;
-    @Column("related_group_member")
-    private String relatedGroupMember;
-    @Column("label")
-    private String label;
-    @Column("sub_gm")
-    private String subGm;
-    @Column("cons_sub_gm")
-    private String consSubGm;
-    @Column("related_sub_gm")
-    private String relatedSubGm;
-    @Column("seg_block")
-    private String segBlock;
-    @Column("seg_item")
-    private String segItem;
-    @Column("seg_line")
-    private String segLine;
-    @Column("report_period2")
-    private String reportPeriod2;
-    @Column("rng_type")
-    private String rngType;
-    @Column("rec_layer")
-    private String recLayer;
-    @Column("pd")
-    private String pd;
-    @Column("ecl")
-    private String ecl;
-    @Column("val_tp")
-    private String valTp;
-    @Column("fvpl_tp")
-    private String fvplTp;
-    @Column("bank_tp")
-    private String bankTp;
-    @Column("RAR_account_name")
-    private String rarAccountName;
-    @Column("RAR_account_and_name")
-    private String rarAccountAndName;
-    @Column("pl_rep")
-    private String plRep;
-    @Column("pl_rep_ordered")
-    private String plRepOrdered;
-    @Column("bs_rep")
-    private String bsRep;
-    @Column("bs_rep_ordered")
-    private String bsRepOrdered;
-    @Column("seg_ln")
-    private String segLn;
-    @Column("import_date_time")
-    private String importDateTime;
-    @Column("uploader")
-    private String uploader;
+//    @Column("UNDISC_CF_MATURITY")
+//    private String undiscCfMaturity;
+//    @Column("IFRS_AGGREGATE")
+//    private String ifrsAaggregate;
+//    @Column("COMPONENT")
+//    private String component;
+//    @Column("COMMENT")
+//    private String comment;
+//    @Column("DOER")
+//    private String doer;
+//    @Column("FV_LEVEL")
+//    private String fvLevel;
+//    @Column("BS_LINE_L2")
+//    private String bsLineL2;
+//    @Column("RELATED_PARTY")
+//    private String relatedParty;
+//    @Column("FV3LVL")
+//    private String fv3Lvl;
+//    @Column("NCI_LINE")
+//    private String nciLine;
+//    @Column("DERIVATIVE")
+//    private String derivative;
+//    @Column("CONS_GROUP_MEMBER")
+//    private String consGroupMember;
+//    @Column("TAG")
+//    private String tag;
+//    @Column("TEMP_LINE")
+//    private String tempLine;
+//    @Column("CONS_LAYER")
+//    private String consLayer;
+//    @Column("CONS_LAYER_AGGREGATE")
+//    private String consLayerAggregate;
+//    @Column("SEGMENT_RECONC_LINE")
+//    private String segmentReconcLine;
+//    @Column("SEGMENT_RECONC_LINE_AGGREGATE")
+//    private String segmentReconcLineAggregate;
+//    @Column("CORRESPONDING_IFRS_ACCOUNT")
+//    private String correspondingIfrsAccount;
+//    @Column("RELATED_GROUP_MEMBER")
+//    private String relatedGroupMember;
+//    @Column("LABEL")
+//    private String label;
+//    @Column("SUB_GM")
+//    private String subGm;
+//    @Column("CONS_SUB_GM")
+//    private String consSubGm;
+//    @Column("RELATED_SUB_GM")
+//    private String relatedSubGm;
+//    @Column("SEG_BLOCK")
+//    private String segBlock;
+//    @Column("SEG_ITEM")
+//    private String segItem;
+//    @Column("SEG_LINE")
+//    private String segLine;
+//    @Column("RNG_TYPE")
+//    private String rngType;
+//    @Column("REC_LAYER")
+//    private String recLayer;
+//    @Column("PD")
+//    private String pd;
+//    @Column("ECT")
+//    private String ecl;
+//    @Column("VAL_TP")
+//    private String valTp;
+//    @Column("FVPL_TP")
+//    private String fvplTp;
+//    @Column("BANK_TP")
+//    private String bankTp;
+//    @Column("RAR_ACCOUNT_NAME")
+//    private String rarAccountName;
+//    @Column("RAR_ACCOUNT_AND_NAME")
+//    private String rarAccountAndName;
+//    @Column("PL_REP")
+//    private String plRep;
+//    @Column("PL_REP_ORDERED")
+//    private String plRepOrdered;
+//    @Column("BS_REP")
+//    private String bsRep;
+//    @Column("BS_REP_ORDERED")
+//    private String bsRepOrdered;
+//    @Column("SEG_LN")
+//    private String segLn;
+//    @Column("IMPORT_DATE_TIME")
+//    private String importDateTime;
+//    @Column("UPLOADER")
+//    private String uploader;
 }

@@ -1,6 +1,7 @@
 package com.example.sbermcfo.controller;
 
 import com.example.sbermcfo.converter.IfrsTransactionsConverter;
+import com.example.sbermcfo.refs.domain.IfrsTransactions;
 import com.example.sbermcfo.refs.dto.IfrsTransactionsDto;
 import com.example.sbermcfo.refs.service.IfrsTransactionsService;
 import org.apache.poi.ss.usermodel.*;
@@ -34,6 +35,7 @@ public class IfrsTransactionsController {
     private final static String FILE = "/home/Chadsky/Рабочий стол/Аня полезное/newTransaction.xlsx";
     XSSFWorkbook wb;
 
+
 //    @GetMapping(path = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 //    public ResponseEntity<IfrsTransactionsDto> getById(@PathVariable("id") Integer id) {
 //        return ResponseEntity.ok(ifrsTransactionsService.getById(id));
@@ -42,12 +44,15 @@ public class IfrsTransactionsController {
     @RequestMapping("/put")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity createFromEcxel(String filePath){
-        IfrsTransactionsDto dto = new IfrsTransactionsDto();
+
+        List<IfrsTransactionsDto> dtos = new ArrayList<>();
+
         int checkRow = 0;
         String [] columnNamesArray = {};
         try {
             wb = new XSSFWorkbook(FILE);
             for (Row row : wb.getSheetAt(0)) {
+                IfrsTransactionsDto dto = new IfrsTransactionsDto();
                 if (checkRow == 0) {
                     int indexMap = 0;
                     for (Cell cell : row) {
@@ -58,20 +63,22 @@ public class IfrsTransactionsController {
                     continue;
                 } else {
                     int indexMap = 0;
+
                     for (Cell cell : row) {
-                        dto.setId(2);
+
                         if(columnNamesArray[indexMap].equals("ReportDate")) {
+                            //dto = IfrsTransactionsDto.builder().reportDateId(7).build();
                             dto.setReportDateId(6);
                         } if(columnNamesArray[indexMap].equals("BS_PL_IMPACT")) {
-                            dto.setBsPlImpact((int)cell.getNumericCellValue());
+                            dto.setBsPlImpact((int)(cell.getNumericCellValue()));
                         } if(columnNamesArray[indexMap].equals("Amount")) {
-                            dto.setAmount((cell.getNumericCellValue()));
+                            dto.setAmount(cell.getNumericCellValue());
                         } if(columnNamesArray[indexMap].equals("Short_Name")){
                             dto.setShortName(cell.getStringCellValue());
-                        } if(columnNamesArray[indexMap].equals("IFRS Account")){
-                            dto.setIfrsAccountId((int)(cell.getNumericCellValue()));
-                        } if(columnNamesArray[indexMap].equals("RAR Account")){
-                            dto.setRarAccount(cell.getNumericCellValue());
+//                        } if(columnNamesArray[indexMap].equals("IFRS Account")){
+//                            dto.setIfrsAccountId((int)(cell.getNumericCellValue()));
+//                        } if(columnNamesArray[indexMap].equals("RAR Account")){
+//                            dto.setRarAccount(cell.getNumericCellValue());
 //								} if(columnNamesArray[indexMap].equals("Rar_Acc3")){
 //									dto.setRarAccount3(cell.getNumericCellValue());
 //								} if(columnNamesArray[indexMap].equals("Rar_Acc5")){
@@ -98,20 +105,33 @@ public class IfrsTransactionsController {
 //									dto.setGroupMember(cell.getStringCellValue());
 //								} if(columnNamesArray[indexMap].equals("Individual_PLI")) {
 //									dto.setIndividualPli(cell.getStringCellValue());
+
                         }
                         indexMap++;
 
-                    }System.out.println(dto);
+
+                    }dtos.add(dto);
+                    System.out.println(dto);
+
+
                 }
-                System.out.print(Arrays.toString(columnNamesArray) + " " + columnNamesArray.length + " ");
+
+
             }
+            System.out.print(Arrays.toString(columnNamesArray) + " " + columnNamesArray.length + " ");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+//        IfrsTransactionsDto dtoMain = IfrsTransactionsDto.builder()
+//                .reportDateId(dto.getReportDateId())
+//                .shortName(dto.getShortName())
+//                .amount(dto.getAmount())
+//                .build();
         try {
-            return ResponseEntity.ok(ifrsTransactionsService.create(dto));
+            return ResponseEntity.ok(ifrsTransactionsService.createAll(dtos));
         }catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -128,10 +148,10 @@ public class IfrsTransactionsController {
     }
 
 
-//    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity getAll(){
-//        return ResponseEntity.ok(ifrsTransactionsService.getAll());
-//    }
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity getAll(){
+        return ResponseEntity.ok(ifrsTransactionsService.getAll());
+    }
 
 
 //    @GetMapping(path = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -170,7 +190,8 @@ public class IfrsTransactionsController {
 //
 //    @DeleteMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 //    public ResponseEntity<String> deleteById(@PathVariable("id") Integer id) {
-//        ifrsTransactionsService.deleteById(id);
+//        ifrsTransactionsService.deleteById(id)
+    ;
 //        return ResponseEntity.ok("Successfully deleted");
 //    }
 

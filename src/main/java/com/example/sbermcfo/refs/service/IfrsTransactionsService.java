@@ -13,4 +13,6 @@ public interface IfrsTransactionsService {
     void deleteById(Integer id);
     IfrsTransactionsDto create(IfrsTransactionsDto dto);
     IfrsTransactionsDto update(IfrsTransactionsDto dto);
+    List<IfrsTransactionsDto> createAll(List<IfrsTransactionsDto> dtos);
+
 }
